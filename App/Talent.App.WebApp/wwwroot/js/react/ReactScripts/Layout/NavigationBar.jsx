@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import NavigationDropdown from './NavigationDropdown.jsx'
+import { NavigationDropdown } from './NavigationDropdown.jsx'
 import { NavigationLink, NavigationButton, NavigationPlaceholder } from './NavigationDropdown.jsx'
 
 export default class NavigationBar extends React.Component {

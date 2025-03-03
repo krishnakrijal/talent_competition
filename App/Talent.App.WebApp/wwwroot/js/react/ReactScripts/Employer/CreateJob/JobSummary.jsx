@@ -1,6 +1,8 @@
 ﻿/* Self introduction section */
 import React, { Component } from 'react';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
+import { ErrorMessage } from './ErrorMessage.jsx';
+
 
 export class JobSummary extends React.Component {
     constructor(props) {
@@ -22,6 +24,7 @@ export class JobSummary extends React.Component {
                     onChange={this.updateField}
                 >
                 </textarea>
+                <ErrorMessage isError={this.props.isError} errorMessage={this.props.errorMessage} />
             </div>
         )
     }

@@ -1,0 +1,24 @@
+﻿﻿.cardMargin {
+    margin-right: 10px;
+}
+
+.expireJobMargin {
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+.buttonGroup {
+    margin-bottom: 10px !important; /* Space from the bottom */
+    max-width: 100% !important;
+}
+
+.customTinyButtonStyle {
+    padding: 0.5rem 0.6rem !important;
+    font-size: 10px !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+}
+
+.buttonRightMargin {
+    margin-right: 2px !important;
+}

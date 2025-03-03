@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import CkEditor from "react-ckeditor-component";
+import { ErrorMessage } from './ErrorMessage.jsx';
 
 
 export class JobDescription extends React.Component {
@@ -8,7 +9,7 @@ export class JobDescription extends React.Component {
         this.updateContent = this.updateContent.bind(this);
         this.onChange = this.onChange.bind(this);
         this.updatePropData = this.updatePropData.bind(this);
-      
+
     };
     updateContent(newContent) {
         this.updatePropData(newContent);
@@ -22,7 +23,7 @@ export class JobDescription extends React.Component {
         var event = { target: { name: "description", value: newContent } }
         this.props.controlFunc(event);
     }
-   
+
     render() {
         return (
             <section>
@@ -36,6 +37,7 @@ export class JobDescription extends React.Component {
                         "change": this.onChange
                     }}
                 />
+                <ErrorMessage isError={this.props.isError} errorMessage={this.props.errorMessage} />
             </section>
         )
     }

@@ -10498,32 +10498,39 @@
     ]
   },
   "packageFolders": {
-    "/Users/danielchoi/.nuget/packages/": {}
+    "C:\\Users\\pooja\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/danielchoi/Documents/MVP Studio/talent-competition/Talent.Services.Identity/Talent.Services.Identity.csproj",
+      "projectUniqueName": "C:\\Users\\pooja\\Source\\Repos\\talent-competition\\Talent.Services.Identity\\Talent.Services.Identity.csproj",
       "projectName": "Talent.Services.Identity",
-      "projectPath": "/Users/danielchoi/Documents/MVP Studio/talent-competition/Talent.Services.Identity/Talent.Services.Identity.csproj",
-      "packagesPath": "/Users/danielchoi/.nuget/packages/",
-      "outputPath": "/Users/danielchoi/Documents/MVP Studio/talent-competition/Talent.Services.Identity/obj/",
+      "projectPath": "C:\\Users\\pooja\\Source\\Repos\\talent-competition\\Talent.Services.Identity\\Talent.Services.Identity.csproj",
+      "packagesPath": "C:\\Users\\pooja\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pooja\\Source\\Repos\\talent-competition\\Talent.Services.Identity\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/danielchoi/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\pooja\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/danielchoi/Documents/MVP Studio/talent-competition/Talent.Common/Talent.Common.csproj": {
-              "projectPath": "/Users/danielchoi/Documents/MVP Studio/talent-competition/Talent.Common/Talent.Common.csproj"
+            "C:\\Users\\pooja\\Source\\Repos\\talent-competition\\Talent.Common\\Talent.Common.csproj": {
+              "projectPath": "C:\\Users\\pooja\\Source\\Repos\\talent-competition\\Talent.Common\\Talent.Common.csproj"
             }
           }
         }
@@ -10537,7 +10544,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -10603,7 +10611,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

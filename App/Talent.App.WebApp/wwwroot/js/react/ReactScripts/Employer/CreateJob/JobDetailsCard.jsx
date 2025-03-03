@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import ReactDOM from 'react-dom';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { Dropdown } from 'semantic-ui-react'
@@ -7,11 +6,12 @@ import { countryOptions } from '../common.js'
 import { JobCategories } from './JobCategories.jsx';
 import { Salary } from './Salary.jsx';
 import { Location } from './Location.jsx';
+import { ErrorMessage } from './ErrorMessage.jsx';
 
 export class JobDetailsCard extends React.Component {
     constructor(props) {
         super(props);
-        
+
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeDate = this.handleChangeDate.bind(this);
         this.updateJob = this.updateJob.bind(this);
@@ -22,7 +22,7 @@ export class JobDetailsCard extends React.Component {
 
     handleChange(event) {
         var data = Object.assign({}, this.props.jobDetails);
-        
+
         //required
         const name = event.target.name;
         const value = event.target.value;
@@ -64,7 +64,7 @@ export class JobDetailsCard extends React.Component {
                 target: { name: "jobDetails", value: data }
             }
             this.props.updateStateData(updateData);
-        }        
+        }
     }
     updateJob() {
         this.props.createJob();
@@ -73,13 +73,31 @@ export class JobDetailsCard extends React.Component {
         const { jobDetails } = this.props;
         const { jobType } = jobDetails;
         //expires in 14 days by default
-        const expiryDate = this.props.expiryDate instanceof moment ? this.props.expiryDate : moment().add(14, 'days');
+        //const expiryDate = this.props.expiryDate instanceof moment ? this.props.expiryDate : moment().add(14, 'days');
+
+       
+        function convertToDate(date) {
+            if (!date) return null; // Ensure null values are handled
+            if (moment.isMoment(date)) return date.toDate(); // Convert Moment.js object to JS Date
+            if (date instanceof Date) return date; // Already a Date object
+            return new Date(date); // Convert string timestamps to Date
+        }
+
+
+        const endDate = convertToDate(jobDetails?.endDate);
+        const startDate = convertToDate(jobDetails?.startDate);
+        const expiryDate = convertToDate(this.props.expiryDate);
+
+
+        const hasMissingJobDetails = !!Object.keys(this.props.formErrors).find(key => key.startsWith('jobDetails.'));
         return (
             <div className="ui segment">
                 <div className="content">
                     <div className="header">
                         Job Details
-                     </div>
+                        <ErrorMessage isError={hasMissingJobDetails} errorMessage="Please provide the required fields in JobDetails" />
+                        {/*hasMissingJobDetails ? <div className="ui basic red pointing prompt label transition visible">{"Please provide the required fields in JobDetails"}</div> : null*/}
+                    </div>
                 </div>
 
                 <div className="content">
@@ -139,27 +157,28 @@ export class JobDetailsCard extends React.Component {
                                         *Start Date:
                                         <br />
                                         <DatePicker
-                                            selected={jobDetails.startDate}
+                                            selected={jobDetails.startDate ? new Date(jobDetails.startDate) : null}
                                             onChange={(date) => this.handleChangeDate(date, "startDate")}
-                                            minDate={moment()}
+                                            minDate={new Date()}
                                         />
+
                                     </div>
                                     <div className="summary">
                                         End Date:
                                         <br />
                                         <DatePicker
-                                            selected={jobDetails.endDate}
+                                            selected={jobDetails.endDate ? new Date(jobDetails.endDate) : null}
                                             onChange={(date) => this.handleChangeDate(date, "endDate")}
-                                            minDate={moment()}
+                                            minDate={new Date()}
                                         />
                                     </div>
-                                    <div className="summary">
+                                    <div className="summary">   
                                         *Expiry Date:
                                         <br />
                                         <DatePicker
-                                            selected={expiryDate}
-                                            onChange={(date) => this.handleChangeDate(date, "expiryDate")}
-                                            minDate={moment()}
+                                            selected={this.props.expiryDate ? new Date(this.props.expiryDate) : null}
+                                            onChange={(date) => this.props.updateStateData({ target: { name: 'expiryDate', value: date } })}
+                                            minDate={new Date()}
                                         />
                                     </div>
                                 </div>
@@ -169,7 +188,7 @@ export class JobDetailsCard extends React.Component {
                                     <div className="summary">
                                         Salary Per Annum:
                                         <br />
-                                        <Salary salary={jobDetails.salary} handleChange={this.handleChange}/>
+                                        <Salary salary={jobDetails.salary} handleChange={this.handleChange} />
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +196,7 @@ export class JobDetailsCard extends React.Component {
                                 <div className="content">
                                     <div className="summary">
                                         *Location:
-                                        <Location location={jobDetails.location} handleChange={this.handleChange}/>
+                                        <Location location={jobDetails.location} handleChange={this.handleChange} />
                                     </div>
                                 </div>
                             </div>

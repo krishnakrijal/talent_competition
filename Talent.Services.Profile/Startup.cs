@@ -44,10 +44,9 @@ namespace Talent.Services.Profile
                 options.AddPolicy("AllowWebAppAccess", builder =>
                 {
                     builder
-                        .WithOrigins("http://localhost:61772","http://localhost:60998") // Specify your allowed origins here
+                        .AllowAnyOrigin() // Specify your allowed origins here
                         .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials();  
+                        .AllowAnyHeader();
                 });
             });
 
