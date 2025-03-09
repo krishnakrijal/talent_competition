@@ -31,3 +31,8 @@ obj/
 # Azure artifacts
 .azure/
 .publish/
+# Ignore build and cache files
+**/obj/
+**/bin/
+**/*.cache
+
