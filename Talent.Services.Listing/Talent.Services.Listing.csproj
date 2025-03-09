@@ -2,9 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+	  <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     <PackageId>Talent.Services.Listing</PackageId>
-  </PropertyGroup>
+ </PropertyGroup>
+
+	<PropertyGroup>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Domain\Models\" />

@@ -244,10 +244,11 @@ C:\Users\pooja\Source\Repos\talent-competition\App\Talent.App.WebApp\obj\Debug\n
 C:\Users\pooja\Source\Repos\talent-competition\App\Talent.App.WebApp\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Talent.App.WebApp.props
 C:\Users\pooja\Source\Repos\talent-competition\App\Talent.App.WebApp\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Talent.App.WebApp.props
 C:\Users\pooja\Source\Repos\talent-competition\App\Talent.App.WebApp\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\pooja\Source\Repos\talent-competition\App\Talent.App.WebApp\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\pooja\Source\Repos\talent-competition\App\Talent.App.WebApp\obj\Debug\net8.0\Talent.A.4DF9F8C5.Up2Date
 C:\Users\pooja\Source\Repos\talent-competition\App\Talent.App.WebApp\obj\Debug\net8.0\Talent.App.WebApp.dll
 C:\Users\pooja\Source\Repos\talent-competition\App\Talent.App.WebApp\obj\Debug\net8.0\refint\Talent.App.WebApp.dll
 C:\Users\pooja\Source\Repos\talent-competition\App\Talent.App.WebApp\obj\Debug\net8.0\Talent.App.WebApp.pdb
 C:\Users\pooja\Source\Repos\talent-competition\App\Talent.App.WebApp\obj\Debug\net8.0\Talent.App.WebApp.genruntimeconfig.cache
 C:\Users\pooja\Source\Repos\talent-competition\App\Talent.App.WebApp\obj\Debug\net8.0\ref\Talent.App.WebApp.dll
+C:\Users\pooja\Source\Repos\talent-competition\App\Talent.App.WebApp\obj\Debug\net8.0\Talent.App.WebApp.sourcelink.json
+C:\Users\pooja\Source\Repos\talent-competition\App\Talent.App.WebApp\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

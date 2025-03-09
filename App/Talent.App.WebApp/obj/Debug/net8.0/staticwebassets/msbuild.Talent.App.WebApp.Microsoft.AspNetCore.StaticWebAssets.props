@@ -1152,6 +1152,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\raphael.js'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\react\.env'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Talent.App.WebApp</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Talent.App.WebApp</BasePath>
+      <RelativePath>js/react/.env</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>nym5qqi5g6</Fingerprint>
+      <Integrity>gZoeXsvYfjKJOSbrS5Fgg1g8fV0gPiASD8sYYYOsLCg=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\react\.env'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\react\dist\accountProfile.bundle.js'))">
       <SourceType>Package</SourceType>
       <SourceId>Talent.App.WebApp</SourceId>
@@ -1902,8 +1920,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>x34mc8mlmp</Fingerprint>
-      <Integrity>TQqJsA/FAqUoEbYSqiaovE4mo5q8qezNwB5VmdXNjNI=</Integrity>
+      <Fingerprint>3fbw8ihzzm</Fingerprint>
+      <Integrity>z2GR/GNxVuJc8XxKQJ5ZRSZctpepUNQaHktP6gqfi1k=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\react\ReactScripts\Employer\CreateJob\CreateJob.jsx'))</OriginalItemSpec>
@@ -2154,8 +2172,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>zwdht0pi3i</Fingerprint>
-      <Integrity>TVK4IG88uOn+bYK/3+9x7VPw/0inBk+ZRqZsyV3AbBA=</Integrity>
+      <Fingerprint>i9p6e639mh</Fingerprint>
+      <Integrity>miTNfudp9vCqBKH6d/4hUmpM2hTIdwAt8nyX0fQqRKY=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\react\ReactScripts\Employer\ManageJob\ManageJob.jsx'))</OriginalItemSpec>
@@ -2874,8 +2892,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>v5v2jv0din</Fingerprint>
-      <Integrity>Qxn6U/QH6ExAIt/swj1E+ERziyLuR5M/j7ThFbn6g54=</Integrity>
+      <Fingerprint>7yiwn75fcw</Fingerprint>
+      <Integrity>7yqciZudKJha0k606/g98L+moyeaXXnHn8XI1mtt9iY=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\react\ReactScripts\Profile\EmployerProfile.jsx'))</OriginalItemSpec>
@@ -3918,8 +3936,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>eekius6nuu</Fingerprint>
-      <Integrity>OtpPvs6xey+nm4VmX0JCTxqH9mw39Zgfn4LpV7XnVAk=</Integrity>
+      <Fingerprint>4394eqjetn</Fingerprint>
+      <Integrity>AC1t14odW142iIlMHAJ/e9ry9FgOCoPwUhIfboyOCYA=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\react\webpack.config.js'))</OriginalItemSpec>

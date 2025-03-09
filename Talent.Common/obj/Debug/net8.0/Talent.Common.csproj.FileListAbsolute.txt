@@ -10,3 +10,4 @@ C:\Users\pooja\Source\Repos\talent-competition\Talent.Common\obj\Debug\net8.0\Ta
 C:\Users\pooja\Source\Repos\talent-competition\Talent.Common\obj\Debug\net8.0\refint\Talent.Common.dll
 C:\Users\pooja\Source\Repos\talent-competition\Talent.Common\obj\Debug\net8.0\Talent.Common.pdb
 C:\Users\pooja\Source\Repos\talent-competition\Talent.Common\obj\Debug\net8.0\ref\Talent.Common.dll
+C:\Users\pooja\Source\Repos\talent-competition\Talent.Common\obj\Debug\net8.0\Talent.Common.sourcelink.json

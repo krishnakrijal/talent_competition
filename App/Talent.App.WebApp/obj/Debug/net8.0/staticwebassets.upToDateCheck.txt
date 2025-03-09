@@ -63,6 +63,7 @@ wwwroot\js\modernizr-2.6.2.js
 wwwroot\js\moment.js
 wwwroot\js\particles.min.js
 wwwroot\js\raphael.js
+wwwroot\js\react\.env
 wwwroot\js\react\dist\accountProfile.bundle.js
 wwwroot\js\react\dist\bundle.js
 wwwroot\js\react\dist\employerFeed.bundle.js

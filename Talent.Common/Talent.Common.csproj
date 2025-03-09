@@ -4,6 +4,10 @@
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
+	<PropertyGroup>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+
   <ItemGroup>
     <!-- Upgrade AWS SDK packages to the latest compatible versions -->
     <PackageReference Include="AWSSDK.Core" Version="3.7.400.40" />

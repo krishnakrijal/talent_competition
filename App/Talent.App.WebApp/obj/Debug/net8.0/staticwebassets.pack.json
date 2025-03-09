@@ -269,6 +269,10 @@
       "PackagePath": "staticwebassets\\js\\raphael.js"
     },
     {
+      "Id": "C:\\Users\\pooja\\Source\\Repos\\talent-competition\\App\\Talent.App.WebApp\\wwwroot\\js\\react\\.env",
+      "PackagePath": "staticwebassets\\js\\react\\.env"
+    },
+    {
       "Id": "C:\\Users\\pooja\\Source\\Repos\\talent-competition\\App\\Talent.App.WebApp\\wwwroot\\js\\react\\ReactScripts\\AccountProfile.js",
       "PackagePath": "staticwebassets\\js\\react\\ReactScripts\\AccountProfile.js"
     },

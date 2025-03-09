@@ -1,4 +1,6 @@
 ﻿const path = require('path');
+const webpack = require('webpack');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
     context: __dirname,
@@ -45,5 +47,17 @@ module.exports = {
     },
     resolve: {
         extensions: ['.js', '.jsx', '.css']
-    }
+    },
+    plugins: [
+        new NodePolyfillPlugin(),
+        new webpack.ProvidePlugin({
+            process: 'process/browser',
+        }),
+        new webpack.DefinePlugin({
+            'process.env.REACT_APP_IDENTITY_API_URL': JSON.stringify(process.env.REACT_APP_IDENTITY_API_URL || ''),
+            'process.env.REACT_APP_LISTING_API_URL': JSON.stringify(process.env.REACT_APP_LISTING_API_URL || ''),
+            'process.env.REACT_APP_PROFILE_API_URL': JSON.stringify(process.env.REACT_APP_PROFILE_API_URL || ''),
+            'process.env.REACT_APP_ENV': JSON.stringify(process.env.REACT_APP_ENV || 'development'),
+        }),
+    ]
 };
