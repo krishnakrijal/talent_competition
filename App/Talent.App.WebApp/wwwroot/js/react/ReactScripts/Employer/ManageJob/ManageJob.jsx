@@ -77,7 +77,8 @@ export default class ManageJob extends React.Component {
         }
     };
     loadData(callback) {
-        const link = ` http://localhost:51689/listing/listing/getSortedEmployerJobs`;
+        const apiUrl = process.env.REACT_APP_LISTING_API_URL;
+        const link = `${apiUrl}/listing/listing/getSortedEmployerJobs`;
         var cookies = Cookies.get('talentAuthToken');
 
         this.setState({
@@ -186,7 +187,9 @@ export default class ManageJob extends React.Component {
     };
 
     handleClosejob = (jobId) => {
-        const link = `http://localhost:51689/listing/listing/CloseJob`;
+        const apiUrl = process.env.REACT_APP_LISTING_API_URL;
+        const link = `${apiUrl}/listing/listing/CloseJob`;
+
         var cookies = Cookies.get('talentAuthToken');
 
         $.ajax({
