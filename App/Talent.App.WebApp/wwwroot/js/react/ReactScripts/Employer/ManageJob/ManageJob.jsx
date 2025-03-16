@@ -189,7 +189,6 @@ export default class ManageJob extends React.Component {
     handleClosejob = (jobId) => {
         const apiUrl = process.env.REACT_APP_LISTING_API_URL;
         const link = `${apiUrl}/listing/listing/CloseJob`;
-
         var cookies = Cookies.get('talentAuthToken');
 
         $.ajax({

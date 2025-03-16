@@ -94,9 +94,10 @@ class CreateJob extends React.Component {
         const param = this.props.match.params.id ? this.props.match.params.id : "";
         const copyJobParam = this.props.match.params.copyId ? this.props.match.params.copyId : "";
 
-        const apiUrl = process.env.REACT_APP_LISTING_API_URL;
+        
 
         if (param !== "" || copyJobParam !== "") {
+            const apiUrl = process.env.REACT_APP_LISTING_API_URL;
             const link = param !== "" ? `${apiUrl}/listing/listing/GetJobByToEdit?id=` + param
                 : `${apiUrl}/listing/listing/GetJobForCopy?id=` + copyJobParam;
             if (param !== '') {

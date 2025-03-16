@@ -11,7 +11,7 @@ export default class VerifyClient extends React.Component {
         super(props);
         this.state = {
             resetPasswordToken: '',
-            recruiterEmail:'',
+            recruiterEmail: '',
             clientEmail: '',
             newPassword: '',
             confirmPassword: '',
@@ -35,7 +35,7 @@ export default class VerifyClient extends React.Component {
     }
 
     queryString() {
-        let { recruiterEmail,clientEmail, resetPasswordToken} = this.props.match.params;
+        let { recruiterEmail, clientEmail, resetPasswordToken } = this.props.match.params;
         this.setState({
             recruiterEmail,
             clientEmail,
@@ -46,7 +46,8 @@ export default class VerifyClient extends React.Component {
         let data = {
             recruiterEmail, clientEmail, resetPasswordToken
         }
-        let url = `http://localhost:60998/authentication/authentication/verifyClientToken?recruiterEmail=${recruiterEmail}&clientEmail=${clientEmail}&resetPasswordToken=${resetPasswordToken}`;
+        const apiUrl = process.env.REACT_APP_INDENTITY_API_URL;
+        let url = `${apiUrl}/authentication/authentication/verifyClientToken?recruiterEmail=${recruiterEmail}&clientEmail=${clientEmail}&resetPasswordToken=${resetPasswordToken}`;
         $.ajax({
             url: url,
             type: 'POST',
@@ -128,8 +129,9 @@ export default class VerifyClient extends React.Component {
 
     savePassword() {
         let { newPassword, recruiterEmail, clientEmail, resetPasswordToken } = this.state;
-        
-        let resetUrl = `http://localhost:60998/authentication/authentication/validateInvitation?recruiterEmail=${recruiterEmail}&clientEmail=${clientEmail}&resetPasswordToken=${resetPasswordToken}`;
+
+        const apiUrl = process.env.REACT_APP_INDENTITY_API_URL;
+        let resetUrl = `${apiUrl}/authentication/authentication/validateInvitation?recruiterEmail=${recruiterEmail}&clientEmail=${clientEmail}&resetPasswordToken=${resetPasswordToken}`;
 
         $.ajax({
             url: resetUrl,
@@ -224,7 +226,7 @@ export default class VerifyClient extends React.Component {
                                 : <div>
                                     <h3> Your password has been successfully changed </h3>
                                     <h3> <a href={userNavigation("employer")}> Click here to be redirected back to the main site </a> </h3>
-                                    
+
                                     <br />
                                 </div>
                 }

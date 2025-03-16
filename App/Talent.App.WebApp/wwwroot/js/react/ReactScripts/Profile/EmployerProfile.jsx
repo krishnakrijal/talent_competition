@@ -157,7 +157,7 @@ export default class EmployeeProfile extends React.Component {
         const apiUrl = process.env.REACT_APP_PROFILE_API_URL;
         const link = `${apiUrl}/profile/profile/saveEmployerProfile`;
         $.ajax({
-            url: link,
+            url:link,
             headers: {
                 'Authorization': 'Bearer ' + cookies,
                 'Content-Type': 'application/json'

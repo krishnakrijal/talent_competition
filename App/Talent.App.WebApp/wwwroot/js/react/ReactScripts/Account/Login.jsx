@@ -87,9 +87,10 @@ export default class LoginForm extends React.Component {
             email: this.state.email,
             password: this.state.password
         }
-
+        const apiUrl = process.env.REACT_APP_IDENTITY_API_URL;
+        const link = `${apiUrl}/authentication/authentication/signin`;
         $.ajax({
-            url: 'http://localhost:60998/authentication/authentication/signin',
+            url: link,
             type: 'POST',
             data: JSON.stringify(loginModel),
             contentType: 'application/json',

@@ -46,8 +46,18 @@ export default class Register extends React.Component {
             terms: this.state.terms
         };
 
+        const apiUrl = process.env.REACT_APP_IDENTITY_API_URL;
+        if (!apiUrl) {
+            console.error("Error: REACT_APP_IDENTITY_API_URL is undefined.");
+            TalentUtil.notification.show("API URL is not set.", "error", null, null);
+            return;
+        }
+
+        const link = `${apiUrl}/authentication/authentication/signup`;
+        console.log("Final API URL:", link);
+       
         $.ajax({
-            url: 'http://localhost:60998/authentication/authentication/signup',
+            url: link,
             type: 'POST',
             data: JSON.stringify(registerModel),
             contentType: 'application/json',
