@@ -54,7 +54,7 @@ export default class Register extends React.Component {
         }
 
         const link = `${apiUrl}/authentication/authentication/signup`;
-        console.log("Final API URL:", link);
+       // console.log("Final API URL:", link);
        
         $.ajax({
             url: link,

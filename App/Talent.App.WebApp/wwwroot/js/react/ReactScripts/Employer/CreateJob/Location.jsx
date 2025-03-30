@@ -1,76 +1,101 @@
-﻿import React from 'react';
-import ReactDOM from 'react-dom';
-import { Dropdown } from 'semantic-ui-react'
-import { countries } from '../common.js'
+﻿import React from "react";
+import { countries } from "../common.js";
 
 export class Location extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            country: props.location?.country || "",
+            city: props.location?.city || "",
+        };
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componentDidMount() {
-
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (
+            nextProps.location?.country !== prevState.country ||
+            nextProps.location?.city !== prevState.city
+        ) {
+           // console.log("🔄 Syncing state with props:", nextProps.location);
+            return {
+                country: nextProps.location.country || "",
+                city: nextProps.location.city || "",
+            };
+        }
+        return null;
     }
-    
 
     handleChange(event) {
-        var data = Object.assign({}, this.props.location);
-        //required
-        const name = event.target.name;
-        let value = event.target.value;
-        const id = event.target.id;
+        const { name, value } = event.target;
+        this.setState({ [name]: value }, () => {
+            let updatedLocation = {
+                ...this.props.location,
+                [name]: value,
+            };
 
-        data[name] = value;
-        if (name == "country") {
-            data["city"] = "";
-        }
-        var updateData = {
-            target: { name: "location", value: data }
-        }
+            if (name === "country") {
+                updatedLocation.city = "";
+                this.setState({ city: "" });
+            }
 
-        //update props here
-        this.props.handleChange(updateData);
+            this.props.handleChange({
+                target: { name: "location", value: updatedLocation },
+            });
+        });
     }
 
     render() {
-        let countriesOptions = [];
-        let citiesOptions = [];
-        const selectedCountry = this.props.location.country;
-        const selectedCity = this.props.location.city;
-        
-        countriesOptions = Object.keys(countries).map((x) => <option key={x} value={x}>{x}</option>);
+        const { country, city } = this.state;
 
-        if (selectedCountry != "" && selectedCountry != null ) {
-           
-            var popCities = countries[selectedCountry].map(x => <option key={x} value={x}> {x}</option>);
+      //  console.log("📌 Rendering Location - Selected Country:", country);
+       // console.log("📌 Rendering Location - Selected City:", city);
 
-            citiesOptions = <span><select
-                className="ui dropdown"
-                placeholder="City"
-                value={selectedCity}
-                onChange={this.handleChange}
-                name="city">
-                <option value="0"> Select a town or city</option>
-                {popCities}
-            </select><br/></span>
+        // ⏳ Wait for props before rendering dropdowns
+        if (!this.props.location || !this.props.location.country) {
+            return <div>Loading location...</div>;
         }
-    
-    return(
-        <div>
-            <select className="ui right labeled dropdown"
-                placeholder="Country"
-                value={selectedCountry}
-                onChange={this.handleChange}
-                name="country">
 
-                <option value="">Select a country</option>
-                {countriesOptions}
-            </select>
-            <div style={{ marginBottom:"5px", marginTop:"5px" }}></div>
-            {citiesOptions}
+        const countriesOptions = Object.keys(countries).map((c) => (
+            <option key={c} value={c}>
+                {c}
+            </option>
+        ));
+
+        let citiesOptions = [];
+        if (country && countries[country]) {
+            citiesOptions = countries[country].map((c) => (
+                <option key={c} value={c}>
+                    {c}
+                </option>
+            ));
+        }
+
+        return (
+            <div>
+                <select
+                    className="ui dropdown"
+                    name="country"
+                    value={country}
+                    onChange={this.handleChange}
+                >
+                    <option value="">Select a country</option>
+                    {countriesOptions}
+                </select>
+
+                <div style={{ marginBottom: "5px", marginTop: "5px" }}></div>
+
+                {country && citiesOptions.length > 0 && (
+                    <select
+                        className="ui dropdown"
+                        name="city"
+                        value={city}
+                        onChange={this.handleChange}
+                    >
+                        <option value="">Select a city</option>
+                        {citiesOptions}
+                    </select>
+                )}
             </div>
-        )
+        );
     }
-    
 }

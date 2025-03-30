@@ -12,11 +12,10 @@ import { ChildSingleInput } from '../../Form/SingleInput.jsx';
 import { JobDescription } from './JobDescription.jsx';
 import { JobSummary } from './JobSummary.jsx';
 import { BodyWrapper, loaderData } from '../../Layout/BodyWrapper.jsx';
-import { withRouter } from 'react-router-dom'; 
+import { withRouter } from 'react-router-dom';
 import Loading from '../../Layout/Loading.jsx';
 import { ErrorMessage } from './ErrorMessage.jsx';
 
-//  for validation
 const requiredFields = [
     { name: 'title', message: 'Please enter the Title!!' },
     { name: 'description', message: 'Please enter Description!!' },
@@ -29,7 +28,6 @@ const requiredFields = [
     { name: 'jobDetails.location.country', message: 'Please select Country!!' },
     { name: 'jobDetails.location.city', message: 'Please select City!' },
 ];
-
 
 class CreateJob extends React.Component {
     constructor(props) {
@@ -65,15 +63,13 @@ class CreateJob extends React.Component {
         this.updateStateData = this.updateStateData.bind(this);
         this.addUpdateJob = this.addUpdateJob.bind(this);
         this.loadData = this.loadData.bind(this);
-        this.addErrorMessage = this.addErrorMessage.bind(this);
         this.validateField = this.validateField.bind(this);
         this.init = this.init.bind(this);
     }
 
     init() {
         let loaderData = this.state.loaderData;
-        loaderData.allowedUsers.push("Employer");
-        loaderData.allowedUsers.push("Recruiter");
+        loaderData.allowedUsers.push("Employer", "Recruiter");
         loaderData.isLoading = true;
         this.setState({ loaderData });
     }
@@ -82,25 +78,24 @@ class CreateJob extends React.Component {
         this.init();
         this.loadData();
     }
-
     loadData() {
+        //const root = "" 
+        //var param = root.getAttribute('data-id');
         this.setState({
             loaderData: {
                 ...this.state.loaderData,
                 isLoading: true
             }
-        });
+        })
+        var param = this.props.match.params.id ? this.props.match.params.id : "";//workaround till we get Redux in to keep the page from breaking
+        var copyJobParam = this.props.match.params.copyId ? this.props.match.params.copyId : "";
 
-        const param = this.props.match.params.id ? this.props.match.params.id : "";
-        const copyJobParam = this.props.match.params.copyId ? this.props.match.params.copyId : "";
+        const apiUrl = process.env.REACT_APP_LISTING_API_URL;
 
-        
-
-        if (param !== "" || copyJobParam !== "") {
-            const apiUrl = process.env.REACT_APP_LISTING_API_URL;
-            const link = param !== "" ? `${apiUrl}/listing/listing/GetJobByToEdit?id=` + param
+        if (param != "" || copyJobParam != "") {
+            var link = param != "" ? `${apiUrl}/listing/listing/GetJobByToEdit?id=` + param
                 : `${apiUrl}/listing/listing/GetJobForCopy?id=` + copyJobParam;
-            if (param !== '') {
+            if (param != '') {
                 this.setState({
                     heading: "Edit Job"
                 });
@@ -110,7 +105,7 @@ class CreateJob extends React.Component {
                 });
             }
 
-            const cookies = Cookies.get('talentAuthToken');
+            var cookies = Cookies.get('talentAuthToken');
             $.ajax({
                 url: link,
                 headers: {
@@ -121,28 +116,48 @@ class CreateJob extends React.Component {
                 contentType: "application/json",
                 dataType: "json",
                 success: function (res) {
-                    if (res.success === true) {
-                        res.jobData.jobDetails.startDate = moment(res.jobData.jobDetails.startDate);
-                        res.jobData.jobDetails.endDate = res.jobData.jobDetails.endDate ? moment(res.jobData.jobDetails.endDate) : null;
-                        res.jobData.expiryDate = res.jobData.expiryDate
-                            ? moment(res.jobData.expiryDate) > moment()
-                                ? moment(res.jobData.expiryDate) : moment().add(14, 'days') : null;
-                        this.setState({ jobData: res.jobData });
-                    } else {
-                        this.setState({
-                            backendError: res.message
-                        });
+                    if (res.success) {
+                        let jobData = {
+                            id: res.jobData.id || "",
+                            employerID: res.jobData.employerID || "",
+                            title: res.jobData.title || "",
+                            description: res.jobData.description || "",
+                            summary: res.jobData.summary || "",
+                            expiryDate: res.jobData.expiryDate ? moment(res.jobData.expiryDate) : moment().add(14, 'days'),
+                            applicantDetails: {
+                                yearsOfExperience: res.jobData.applicantDetails?.yearsOfExperience || { years: 1, months: 1 },
+                                qualifications: res.jobData.applicantDetails?.qualifications || [],
+                                visaStatus: res.jobData.applicantDetails?.visaStatus || []
+                            },
+                            jobDetails: {
+                                categories: {
+                                    category: res.jobData.jobDetails?.categories?.category || "",
+                                    subCategory: res.jobData.jobDetails?.categories?.subCategory || ""
+                                },
+                                jobType: res.jobData.jobDetails?.jobType || [],
+                                startDate: res.jobData.jobDetails?.startDate ? moment(res.jobData.jobDetails.startDate) : moment(),
+                                endDate: res.jobData.jobDetails?.endDate ? moment(res.jobData.jobDetails.endDate) : null,
+                                salary: res.jobData.jobDetails?.salary || { from: 0, to: 0 },
+                                location: {
+                                    country: res.jobData.jobDetails?.location?.country || "",
+                                    city: res.jobData.jobDetails?.location?.city || ""
+                                }
+                            }
+                        };
 
+                        this.setState({ jobData });
+                    } else {
+                        this.setState({ backendError: res.message });
                         TalentUtil.notification.show(res.message, "error", null, null);
                     }
                 }.bind(this)
-            });
+
+            })
         } else {
             this.setState({
                 heading: "Create Job"
             });
         }
-
         this.setState({
             loaderData: {
                 ...this.state.loaderData,
@@ -150,6 +165,7 @@ class CreateJob extends React.Component {
             }
         });
     }
+
 
     validateField() {
         const missingFieldsTemp = requiredFields.reduce((acc, field) => {
@@ -163,71 +179,49 @@ class CreateJob extends React.Component {
         if (Object.keys(missingFieldsTemp).length > 0) {
             this.setState({ formErrors: missingFieldsTemp });
             return false;
-        } else {
-            return true;
         }
-    }
-
-    addErrorMessage(message) {
-        this.setState(
-            { errorMessage: message }
-        );
+        return true;
     }
 
     addUpdateJob() {
-        const jobData = this.state.jobData;
+        const jobData = { ...this.state.jobData };
         if (moment.isMoment(jobData.expiryDate)) {
             jobData.expiryDate = jobData.expiryDate.toDate();
         }
-        const dataValid = this.validateField();
-        if (!dataValid) {
-            return;
-        } else {
-            this.setState(
-                {
-                    formErrors: {}
-                }
-            );
-        }
+        if (!this.validateField()) return;
+
+        this.setState({ formErrors: {} });
+
         const cookies = Cookies.get('talentAuthToken');
         const apiUrl = process.env.REACT_APP_LISTING_API_URL;
         const link = `${apiUrl}/listing/listing/createUpdateJob`;
+
         $.ajax({
             url: link,
-            headers: {
-                'Authorization': 'Bearer ' + cookies,
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Authorization': 'Bearer ' + cookies, 'Content-Type': 'application/json' },
             dataType: 'json',
             type: "post",
             data: JSON.stringify(jobData),
             success: function (res) {
-                if (res.success === true) {
+                if (res.success) {
                     TalentUtil.notification.show(res.message, "success", null, null);
                     window.location = "/ManageJobs";
                 } else {
                     TalentUtil.notification.show(res.message, "error", null, null);
                 }
-
             }.bind(this)
         });
     }
-    updateStateData(event) {
-        const data = Object.assign({}, this.state.jobData)
-        data[event.target.name] = event.target.value
-        this.setState({
-            jobData: data
-        })
-       // console.log(data);
-    }
-    render() {
-        if (this.state.loaderData.isLoading) {
-            return <Loading />;
-        }
-        if (this.state.backendError) {
-            return <Redirect to="/ManageJobs" />; 
-        }
 
+    updateStateData(event) {
+        const data = { ...this.state.jobData };
+        data[event.target.name] = event.target.value;
+        this.setState({ jobData: data });
+    }
+
+    render() {
+        if (this.state.loaderData.isLoading) return <Loading />;
+        if (this.state.backendError) return <Redirect to="/ManageJobs" />;
         return (
             <BodyWrapper reload={this.init} loaderData={this.state.loaderData}>
                 <section className="page-body">
@@ -307,7 +301,7 @@ class CreateJob extends React.Component {
                     <br />
                 </section>
             </BodyWrapper>
-        );
+        )
     }
 }
 

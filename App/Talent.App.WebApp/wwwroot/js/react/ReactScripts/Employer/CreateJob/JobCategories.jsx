@@ -1,63 +1,105 @@
-﻿import React from 'react';
-import ReactDOM from 'react-dom';
-import { Dropdown } from 'semantic-ui-react'
-import { jobCategories } from '../common.js'
+﻿import React from "react";
+import { jobCategories } from "../common.js";
 
 export class JobCategories extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            category: props.categories?.category || "",
+            subCategory: props.categories?.subCategory || "",
+        };
         this.handleChange = this.handleChange.bind(this);
-        
-    };
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (
+            nextProps.categories?.category !== prevState.category ||
+            nextProps.categories?.subCategory !== prevState.subCategory
+        ) {
+           // console.log("🔄 Syncing state with props:", nextProps.categories);
+            return {
+                category: nextProps.categories.category || "",
+                subCategory: nextProps.categories.subCategory || "",
+            };
+        }
+        return null;
+    }
 
     handleChange(event) {
-        var data = Object.assign({}, this.props.categories);
-        //required
-        const name = event.target.name;
-        let value = event.target.value;
-        const id = event.target.id;
+        const { name, value } = event.target;
+        this.setState({ [name]: value }, () => {
+            let updatedCategories = {
+                ...this.props.categories,
+                [name]: value,
+            };
 
-        data[name] = value;
-        if (name == "category") {
-            data["subCategory"] = "";
-        }
-        var updateData = {
-            target: { type: event.target.type, id: event.target.id, name: "categories", value: data }
-        }
+            if (name === "category") {
+                updatedCategories.subCategory = "";
+                this.setState({ subCategory: "" });
+            }
 
-        //update props here
-        this.props.handleChange(updateData);
+            this.props.handleChange({
+                target: { name: "categories", value: updatedCategories },
+            });
+        });
     }
 
     render() {
-        //let categories = jobCategories.map(x => x.Name);
-        let selectedCategory = this.props.categories.category;
-        let selectedSubCategory = this.props.categories.subCategory;
-        let subcategoryOptions = undefined;
+        const { category, subCategory } = this.state;
 
-        let categoryOptions = jobCategories.map(x => <option value={x.Name} key={x.Code}>{x.Name}</option>);
+       // console.log("📌 Rendering JobCategories - Selected Category:", category);
+        //console.log("📌 Rendering JobCategories - Selected SubCategory:", subCategory);
 
-        if (selectedCategory != undefined && selectedCategory !="") {
-            var subCatList = jobCategories.find(x => x.Name == selectedCategory).SubCategories.map(x =>
-                <option value={x.Name} key={x.Code}>{x.Name}</option>);
-            subcategoryOptions = (<select
-                className="ui search dropdown"
-                onChange={this.handleChange}
-                name="subCategory"
-                value={selectedSubCategory}>
-                {subCatList}
-            </select>)
+        // ⏳ Wait for props before rendering dropdowns
+        if (!this.props.categories || !this.props.categories.category) {
+            return <div>Loading categories...</div>;
+        }
+
+        // Generate category options
+        const categoryOptions = jobCategories.map((x) => (
+            <option value={x.Name} key={x.Code}>
+                {x.Name}
+            </option>
+        ));
+
+        // Generate sub-category options based on selected category
+        let subCatList = [];
+        if (category) {
+            subCatList = jobCategories
+                .find((x) => x.Name === category)
+                ?.SubCategories.map((x) => (
+                    <option value={x.Name} key={x.Code}>
+                        {x.Name}
+                    </option>
+                ));
         }
 
         return (
-            <div className="ui form">
-                <select className="ui search dropdown" onChange={this.handleChange} name="category" value={selectedCategory}>
-                    <option value="">Please Select</option>
-                {categoryOptions}
+            <div>
+                <select
+                    className="ui dropdown"
+                    name="category"
+                    value={category}
+                    onChange={this.handleChange}
+                >
+                    <option value="">Select a category</option>
+                    {categoryOptions}
                 </select>
-                <br />
-                {subcategoryOptions === undefined ? null : subcategoryOptions}
+
+                <div style={{ marginBottom: "5px", marginTop: "5px" }}></div>
+
+                {category && subCatList.length > 0 && (
+                    <select
+                        className="ui dropdown"
+                        name="subCategory"
+                        value={subCategory}
+                        onChange={this.handleChange}
+                    >
+                        <option value="">Select a subcategory</option>
+                        {subCatList}
+                    </select>
+                )}
             </div>
-        )
+        );
     }
 }
